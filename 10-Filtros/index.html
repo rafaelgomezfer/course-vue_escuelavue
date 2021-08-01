@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10 Filtros</title>
+</head>
+<body>
+    
+    <main id="app">
+        <li v-for="user in fullName">{{user | mayuscula| acortado(20) }}</li>
+    </main>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+    <script>
+
+        const app = new Vue({
+            el: "#app",
+            data: {
+                url : "https://randomuser.me/api/?results=50",
+                users: []
+            },
+            created(){                
+                fetch(this.url)
+                .then(respuesta => respuesta.json())
+                .then(respuesta => this.users = respuesta.results.map(usuario => usuario.name))
+            },
+            computed:{
+                fullName(){
+                    return this.users.map(u => `Nombre: ${u.title}: ${u.first} ${u.last}`)
+                }
+            },
+            filters: {
+                mayuscula(datos){
+                    return datos.toUpperCase()
+                },
+                acortado(datos, cantidad){
+                    return datos.substring(0, cantidad) + '...'
+                }
+            }
+        })
+
+        Vue.config.devtools = true;
+    </script>
+</body>
+</html>

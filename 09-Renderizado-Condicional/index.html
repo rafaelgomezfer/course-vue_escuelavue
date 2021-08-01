@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>09 Renderizado Condicional</title>
+</head>
+<body>
+    
+    <main id="app">
+        <form>
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre"><br>
+
+            <label for="apellidos">Apellidos</label>
+            <input type="text" id="apellidos"><br>
+
+            <label for="direction">Dirección</label>
+           
+            <select id="direction" v-model="direction">
+                <option value="misma">Misma dirección</option>
+                <option value="nueva">Ingresar nueva dirección</option>                
+            </select>
+            <br>
+
+            <template v-if="direction === 'nueva'">
+            <label for="nuev-direccion">Nueva direccion</label>
+            <textarea id="nueva-direccion"></textarea>
+            </template>
+
+            <div>
+                <input type="checkbox" name="" id="" v-model="check">
+                <span>He leído y acepto los términos y condiciones.</span>
+            </div>
+
+            <input type="submit" value="Enviar" v-if="check">
+            <p v-else>Debes aceptar los términos y condiciones para poder enviar el formulario</p>
+        </form>
+    </main>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+    <script>
+
+        const app = new Vue({
+            el: "#app",
+            data: {
+                direction: 'misma',
+                check: false
+            }
+        })
+
+        Vue.config.devtools = true;
+    </script>
+</body>
+</html>

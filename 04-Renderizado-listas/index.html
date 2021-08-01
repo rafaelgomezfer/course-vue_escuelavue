@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>04 Renderizado Listas</title>
+</head>
+<body>
+    
+    <div id="app">
+        <p v-for="(valor, propiedad) in usuario">{{ valor}} : {{propiedad}}</p>
+        <hr>       
+        <li v-for="(tarea, index) in tareas">#{{index}} - {{tarea.nombre}} </li>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data: {
+                usuario: {
+                    username: 'rafagomez',
+                    role: 'admin'
+                },
+                tareas: [
+                    {nombre: 'Aprender Javascript Moderno', tiempo: 3},
+                    {nombre: 'Aprender Vue.Js', tiempo: 7},
+                    {nombre: 'Reparar el coche', tiempo: 22},
+                    {nombre: 'Viajar mas', tiempo: 16},
+                    {nombre: 'Desarrollar proyecto', tiempo: 4},
+                ]                
+            }
+        })
+
+        Vue.config.devtools = true;
+    </script>
+</body>
+</html>

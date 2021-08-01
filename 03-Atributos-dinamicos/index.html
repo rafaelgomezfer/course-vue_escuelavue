@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03 Atributos Dinámicos</title>
+</head>
+<body>
+    <div id="app">        
+        <p>Enlace dinámico</p>
+        <input type="text" v-model="enlace"><br>
+        <a :href="enlace" target="_blank">{{enlace}}</a>
+        <!-- <pre>{{$data}}</pre> -->
+
+        <p>Imagen</p>
+        <input type="range" v-model="ancho" >Ancho
+        <br>
+        <input type="range" v-model="alto">Alto
+        <br>
+        <img :src="urlCompleta" alt="">
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data: {
+                enlace: 'https://app.moises.ai/tasks',
+                ancho: '',
+                alto: '',
+                baseUrl: 'https://placekitten.com'
+            },
+            computed:{
+                urlCompleta(){
+                    return `${this.baseUrl}/${this.ancho *3}/${this.alto *3}`;
+                }
+            }
+        })
+
+        Vue.config.devtools = true;
+    </script>
+</body>
+</html>

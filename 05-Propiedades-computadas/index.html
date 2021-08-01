@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>05 Propiedades Computadas</title>
+</head>
+<body>
+    
+    <div id="app">
+        <input type="range" v-model="tiempo">{{tiempo}}
+        <br>
+        <input type="search" v-model="busqueda" placeholder="Buscar tarea">
+        <hr>
+        <p v-for="(valor, propiedad) in usuario">{{ valor}} : {{propiedad}}</p>
+        <hr>       
+        <li v-for="tarea in filtroTareas">{{tarea.nombre}} - {{tarea.tiempo}} </li>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data: {
+                tiempo: 0,
+                busqueda: '',
+                usuario: {
+                    username: 'rafagomez',
+                    role: 'admin'
+                },
+                tareas: [
+                    {nombre: 'Aprender Javascript Moderno', tiempo: 3},
+                    {nombre: 'Aprender Vue.Js', tiempo: 7},
+                    {nombre: 'Reparar el coche', tiempo: 22},
+                    {nombre: 'Viajar mas', tiempo: 16},
+                    {nombre: 'Desarrollar proyecto', tiempo: 34},
+                    {nombre: 'Preparar la cena', tiempo: 40},
+                    {nombre: 'Pasear a boby', tiempo: 90},
+                ]                
+            },
+            computed:{
+                filtroTareas() {
+                    return this.tareas.filter(tarea => {
+                        return tarea.tiempo <= this.tiempo && tarea.nombre.includes(this.busqueda);
+                    });
+                }
+            }
+        })
+
+        Vue.config.devtools = true;
+    </script>
+</body>
+</html>
